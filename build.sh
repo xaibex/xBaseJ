@@ -1,2 +1,5 @@
 #!/bin/bash
-mvn -DskipTests=true clean package
+rm -fr testfiles/*
+cp testresources/* testfiles
+mvn clean package
+rm -fr testfiles/*
