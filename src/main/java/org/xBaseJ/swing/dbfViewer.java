@@ -115,6 +115,7 @@ public class dbfViewer extends JFrame implements ActionListener, WindowListener,
     JMenu menuFile, menuView, menuSearch;
     JMenuItem menuPrint;
     JMenuItem menuSave;
+    JMenuItem menuAddRecord;
     JMenuItem menuOpen;
     JMenuItem menuExit;
     JMenuItem horizontalView;
@@ -152,11 +153,15 @@ public class dbfViewer extends JFrame implements ActionListener, WindowListener,
         menuSave = new JMenuItem("Save..");
         menuSave.setEnabled(startEnabled);
         menuSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.ALT_MASK));
+        menuAddRecord = new JMenuItem("Add Record..");
+        menuAddRecord.setEnabled(startEnabled);
+        menuAddRecord.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, ActionEvent.CTRL_MASK));
         menuExit = new JMenuItem("Exit..");
         menuSave.setEnabled(startEnabled);
         menuSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.ALT_MASK));
         menuFile.add(menuOpen);
         menuFile.add(menuPrint);
+        menuFile.add(menuAddRecord);
         menuFile.add(menuSave);
         menuFile.addSeparator();
         menuFile.add(menuExit);
@@ -184,6 +189,7 @@ public class dbfViewer extends JFrame implements ActionListener, WindowListener,
 
         menuOpen.addActionListener(this);
         menuPrint.addActionListener(this);
+        menuAddRecord.addActionListener(this);
         menuSave.addActionListener(this);
         menuExit.addActionListener(this);
         startFind.addActionListener(this);
@@ -226,6 +232,7 @@ public class dbfViewer extends JFrame implements ActionListener, WindowListener,
                 dbfrp.goTo(1);
 
     		    menuPrint.setEnabled(true);
+                menuAddRecord.setEnabled(true);
     		    menuSave.setEnabled(true);
     		    startFind.setEnabled(true);
     		    findNext.setEnabled(false);
@@ -402,7 +409,9 @@ public class dbfViewer extends JFrame implements ActionListener, WindowListener,
 
 	   }
 
-
+        if (ae.getSource() == menuAddRecord) {
+            tableModel.addRec();
+        }
 
       this.repaint();
 
@@ -689,6 +698,16 @@ class dbfTableModel extends AbstractTableModel
           columnCount = 0;
           rowCount = 0;
       }
+
+    public void addRec()
+    {
+        try {
+            currentDBF.write();
+            currentDBF.gotoRecord(rowCount + 1);
+        } // try
+        catch (Exception e1) {System.out.println(e1); System.exit(1);}
+    }
+
     public void save()
       {
         String inString = "not set yet";
