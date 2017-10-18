@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>xBaseJ</groupId>
+  <groupId>it.ethiclab</groupId>
   <artifactId>xBaseJ</artifactId>
   <version>0.0.1-SNAPSHOT</version>
     <dependencies>
@@ -8,12 +8,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.swt.carbon</groupId>
-            <artifactId>macosx</artifactId>
-            <version>3.3.0-v3346</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
