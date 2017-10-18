@@ -157,7 +157,7 @@ public byte[] write(String value, int originalSize, boolean write, byte original
       }
 
      if (nextavail == LAST_IND)
-      throw new xBaseJException("Error while writing to memo file, unexpected encounter");
+      System.err.println(new xBaseJException("Error while writing to memo file, unexpected encounter"));
 
      bytes_blocks_used = Util.x86(file.readInt());
 
