@@ -42,9 +42,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Logger;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.xBaseJ.fields.DateField;
 
 
@@ -52,7 +51,7 @@ import org.xBaseJ.fields.DateField;
 
 public class Util extends Object {
 
-    static Log logr = LogFactory.getLog(Util.class);
+    static Logger logr = Logger.getLogger(Util.class.getName());
 
     static boolean log4JConfigured = false;
 
@@ -80,10 +79,10 @@ public class Util extends Object {
 		}
 		catch (Exception e)
 		{
-			logr.error(e.getMessage(), e);
+			logr.severe(e.toString());
 		}
 		finally {
-			logr.debug("recheckProperties is " + recheckProperties);
+			logr.fine("recheckProperties is " + recheckProperties);
 
 		}
     }
@@ -271,7 +270,7 @@ public class Util extends Object {
                 propIS = getPropertiesFile();
                 if (propIS != null) {
                 	lastUpdate = propFile.lastModified();
-                	logr.debug("loading properties");
+                	logr.fine("loading properties");
                 	props.load(propIS);
                 }
             }
@@ -282,7 +281,7 @@ public class Util extends Object {
 
                     propIS = new FileInputStream(propFile);
                     lastUpdate = propFile.lastModified();
-                    logr.debug("loading properties, because modified");
+                    logr.fine("loading properties, because modified");
                     props.load(propIS);
                 }
             }
@@ -373,7 +372,7 @@ public class Util extends Object {
 		if (f1.exists())
 			try {
 				propFile = f1;
-				logr.debug("properties file loaded from "+f1.getAbsolutePath());
+				logr.fine("properties file loaded from "+f1.getAbsolutePath());
 				return new FileInputStream(f1);
 			} catch (FileNotFoundException fnfe) {
 				fnfe.printStackTrace();
@@ -385,7 +384,7 @@ public class Util extends Object {
 			if (f2.exists())
 				try {
 					propFile = f2;
-					logr.debug("properties file loaded from "+f2.getAbsolutePath());
+					logr.fine("properties file loaded from "+f2.getAbsolutePath());
 					return new FileInputStream(f2);
 				} catch (FileNotFoundException fnfe) {
 					fnfe.printStackTrace();
@@ -397,7 +396,7 @@ public class Util extends Object {
 				if (f3.exists()) {
 					try {
 						propFile = f3;
-						logr.debug("properties file loaded from "+f3.getAbsolutePath());
+						logr.fine("properties file loaded from "+f3.getAbsolutePath());
 						return new FileInputStream(f3);
 					} catch (FileNotFoundException fnfe) {
 						fnfe.printStackTrace();
@@ -413,29 +412,29 @@ public class Util extends Object {
 					 else { // context is not null
 					   try {
 						is = new FileInputStream(servletContextPath + "/org.xBaseJ.properties");
-						logr.debug("properties file loaded from servlet context path "+servletContextPath + "/org.xBaseJ.properties");
+						logr.fine("properties file loaded from servlet context path "+servletContextPath + "/org.xBaseJ.properties");
 						propFile = new File(servletContextPath + "/org.xBaseJ.properties");
 
 					   }
 					   catch (IOException ioe){
-					 	logr.debug("Searched for org.xBaseJ.properties as " + servletContextPath + "/org.xBaseJ.properties");
+					 	logr.fine("Searched for org.xBaseJ.properties as " + servletContextPath + "/org.xBaseJ.properties");
 					     }
 					  }
 					}
 					if (is != null) {
-						logr.debug("properties file loaded from classpath");
+						logr.fine("properties file loaded from classpath");
 						return is;
 					} else {
-						logr.debug(
+						logr.fine(
 							"Searched for org.xBaseJ.properties as "
 								+ f1.getAbsolutePath());
-						logr.debug(
+						logr.fine(
 							"Searched for org.xBaseJ.properties as "
 								+ f2.getAbsolutePath());
-						logr.debug(
+						logr.fine(
 							"Searched for org.xBaseJ.properties as "
 								+ f3.getAbsolutePath());
-						logr.debug(
+						logr.fine(
 							"Searched for org.xBaseJ.properties in classpath environment variable");
 						return null;
 					}
@@ -459,7 +458,7 @@ public class Util extends Object {
                 try {
                     propIS.close();
                 } catch (IOException e) {
-                    logr.fatal(e.getMessage(), e);
+                    logr.severe(e.toString());
                 }
                 propIS = null;
             }
