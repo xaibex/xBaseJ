@@ -1,6 +1,6 @@
 # build
 
-    mvn clean package
+    ./build.sh
 
 # clean
 Since tests modify some files, it is necessary to hard reset files after building. TODO: do not modify test files.
@@ -9,4 +9,4 @@ Since tests modify some files, it is necessary to hard reset files after buildin
 
 # usage
 
-    mvn exec:java -Dexec.mainClass=org.xBaseJ.swing.dbfViewer
+    ./run.sh
