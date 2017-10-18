@@ -1,2 +1,3 @@
 #!/bin/bash
-mvn exec:java -Dexec.mainClass=org.xBaseJ.swing.dbfViewer
+./build.sh
+mvn exec:java -DDBF.RESET=true -Dexec.mainClass=org.xBaseJ.swing.dbfViewer

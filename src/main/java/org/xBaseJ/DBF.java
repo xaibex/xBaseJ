@@ -1634,7 +1634,15 @@ public class DBF extends Object {
 		buffer.put(delete_ind);
 
 		for (i = 0; i < fldcount; i++) {
-			tField = (Field) fld_root.elementAt(i);
+			tField = fld_root.elementAt(i);
+			Boolean b = Boolean.parseBoolean(System.getProperty("DBF.RESET"));
+			if (b != null && b) {
+				if (tField.isCharField() || tField.isMemoField()) {
+					tField.put("");
+				} else if (tField.isLogicalField()) {
+					tField.put("F");
+				}
+			}
 			tField.write();
 		}
 

@@ -258,6 +258,20 @@ public class dbfViewer extends JFrame implements ActionListener, WindowListener,
                 this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
     public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == menuAddRecord) {
+            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            try {
+                tableModel.addRec();
+                fileChanged = false;
+                System.out.println("added new record!");
+                tableSetUpToGo();
+                this.invalidate();
+                this.repaint();
+            } finally {
+                this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+            return;
+        }
 
        if (ae.getSource() == menuOpen)
           {
@@ -408,10 +422,6 @@ public class dbfViewer extends JFrame implements ActionListener, WindowListener,
 	      Toolkit.getDefaultToolkit().beep();
 
 	   }
-
-        if (ae.getSource() == menuAddRecord) {
-            tableModel.addRec();
-        }
 
       this.repaint();
 
@@ -702,8 +712,10 @@ class dbfTableModel extends AbstractTableModel
     public void addRec()
     {
         try {
+            System.out.println("getCurrentRecordNumber = " + currentDBF.getCurrentRecordNumber());
             currentDBF.write();
-            currentDBF.gotoRecord(rowCount + 1);
+            System.out.println("getCurrentRecordNumber = " + currentDBF.getCurrentRecordNumber());
+            getData();
         } // try
         catch (Exception e1) {System.out.println(e1); System.exit(1);}
     }

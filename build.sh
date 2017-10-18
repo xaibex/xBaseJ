@@ -1,2 +1,2 @@
 #!/bin/bash
-mvn clean package
+mvn -DskipTests=true clean package
