@@ -95,7 +95,7 @@ import org.xBaseJ.indexes.MDXFile;
 import org.xBaseJ.indexes.NDX;
 
 
-public class DBF extends Object {
+public class DBF implements DbfApi {
 
 	protected String dosname;
 	protected int current_record = 0;
