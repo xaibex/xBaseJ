@@ -4,3 +4,4 @@ target/
 *.dbf
 *.ndx
 *.fpt
+testfiles/*
