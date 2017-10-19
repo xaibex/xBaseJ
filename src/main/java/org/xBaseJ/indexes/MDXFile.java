@@ -129,6 +129,7 @@ public MDXFile(String Name, DBF inDBF, boolean destroy) throws IOException
   tags = new TagDescriptor[maxTags];
   MDXes = new MDX[maxTags];
     } catch (Throwable t) {
+        t.printStackTrace();
         closeFile(raFile);
         if (t instanceof IOException) {
             throw (IOException) t;
