@@ -51,7 +51,7 @@ public abstract class DBTFile extends Object
 public void rename(String name) throws IOException
 {
 
-String tname = new String(name.substring(0,name.length()-1) + "t");
+String tname = new String(name.substring(0,name.length()-1) + (Character.isUpperCase(name.charAt(name.length()-1)) ? "T" : "t"));
 file.close();
 File nfile = new File(tname);
 nfile.delete();
