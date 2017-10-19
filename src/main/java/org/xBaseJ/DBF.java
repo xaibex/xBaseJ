@@ -2154,7 +2154,7 @@ public class DBF implements DbfApi {
 		if (parent == null)
 			parent = ".";
 
-		File f = File.createTempFile("tempxbase", "tmp");
+		File f = File.createTempFile("tempxbase", ".dbf");
  		String tempname = f.getAbsolutePath();
 
 		DBF tempDBF = new DBF(tempname, version, true);
