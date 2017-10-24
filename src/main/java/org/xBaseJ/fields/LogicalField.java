@@ -157,8 +157,10 @@ public void put(char inValue) throws xBaseJException
      case '0':
         buffer[0] = BYTEFALSE;
         break;
-     default:
-            throw new xBaseJException("Invalid logical Field value");
+     default: {
+            buffer[0] = BYTEFALSE;
+            System.out.println("Invalid logical Field value " + inValue + ", setting FALSE.");
+      }
     }
   }
 
