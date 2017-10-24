@@ -201,7 +201,7 @@ public class MemoField extends Field {
      *            value to set Field to.
      */
     public void put(String invalue) {
-	value = new String(invalue);
+	value = new String(invalue != null ? invalue : "");
 	byteValue = value.getBytes();
     }
 
