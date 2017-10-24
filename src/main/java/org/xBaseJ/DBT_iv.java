@@ -87,8 +87,10 @@ public void setNextBlock() throws IOException
 
   int lastind = Util.x86(file.readInt());
 
-  if (lastind != LAST_IND)
-    throw new xBaseJException("Unexpected encounter in read text file");
+  if (lastind != LAST_IND) {
+    System.err.println("Unexpected encounter in read text file lastind = " + lastind + ", LAST_IND = " + LAST_IND);
+    return new byte[]{};
+  }
 
   int size = Util.x86(file.readInt());
 
