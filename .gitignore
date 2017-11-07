@@ -5,3 +5,6 @@ target/
 *.ndx
 *.fpt
 testfiles/*
+.classpath
+.project
+.settings/
