@@ -46,4 +46,6 @@ public interface DbfApi {
 			CloneNotSupportedException;
 
     DBFTypes getVersion();
+
+    void addField(Field aField) throws xBaseJException, IOException;
 }
