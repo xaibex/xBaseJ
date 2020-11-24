@@ -57,7 +57,8 @@ static final short BLOCKLENGTH = 512;
   int freepages;        /* pages in next free block             */
   byte created[] = new byte[3];        /* file creation date                   */
   byte resrvd3;
-  int something[] = new int[4];
+  int somethingCount=124; /* Rest of the Block Count */
+  int something[] = new int[somethingCount];
   RandomAccessFile nfile;
   String knownName;
 
@@ -88,12 +89,19 @@ static final short BLOCKLENGTH = 512;
   indexes = 0;
   resrvd1[0] = 48;
   resrvd1[1] = 32;
-  resrvd2[1] = 27;
+  resrvd2[1] = 0;//was 27 //Important Fix for functionality with Microsoft Access
   created[0] = 0; //yyyy
   created[1] = 0; //mm
   created[2] = 0; //dd
-  something[0] = 25;
-  something[1] = 1;
+
+      //Ititialize something
+      for(int i=0;i<somethingCount;i++)
+      {
+          something[i] = 0;
+      }
+      //Set Important Value for functionality with Microsoft Access
+      something[120]=65536;
+
   knownName = new String(Name);
   }
 
@@ -126,10 +134,10 @@ static final short BLOCKLENGTH = 512;
   freepages = nfile.readInt();
   nfile.read(created);
   resrvd3 = nfile.readByte();
-  something[0] = nfile.readInt();
-  something[1] = nfile.readInt();
-  something[2] = nfile.readInt();
-  something[3] = nfile.readInt();
+  //something[0] = nfile.readInt();
+  //something[1] = nfile.readInt();
+  //something[2] = nfile.readInt();
+  //something[3] = nfile.readInt();
   redo_numbers();
   }
 
@@ -148,6 +156,11 @@ static final short BLOCKLENGTH = 512;
   lastreIndex[1] = (byte) (d.get(Calendar.MONTH) + 1);
   lastreIndex[2] = (byte) (d.get(Calendar.DAY_OF_MONTH));
 
+  //Added Created Date to match Microsoft Access compatible mdx Files.
+  created[0] = (byte) (d.get(Calendar.YEAR) - 1900);
+  created[1] = (byte) (d.get(Calendar.MONTH) + 1);
+  created[2] = (byte) (d.get(Calendar.DAY_OF_MONTH));
+
   nfile.write(lastreIndex);
   nfile.write(DBFname);
   nfile.writeShort(blocksize);
@@ -161,10 +174,10 @@ static final short BLOCKLENGTH = 512;
   nfile.writeInt(freepages);
   nfile.write(created);
   nfile.writeByte(resrvd3);
-  nfile.writeInt(something[0]);
-  nfile.writeInt(something[1]);
-  nfile.writeInt(something[2]);
-  nfile.writeInt(something[3]);
+  for(int i=0;i<somethingCount;i++)
+  {
+      nfile.writeInt(something[i]);
+  }
   redo_numbers();
 
   }
