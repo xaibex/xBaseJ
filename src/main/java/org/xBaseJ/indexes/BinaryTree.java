@@ -78,37 +78,59 @@ if (top != null) {
 
 private BinaryTree findPos(NodeKey inkey)
 {
-
-if (key.compareKey(inkey) > 0)
-   if (lesser == null) return this;
-   else return(lesser.findPos(inkey));
-else
-   if (greater == null) return this;
-return(greater.findPos(inkey));
+    //Rewritten to Avoid StackOverflowError
+    BinaryTree tmpTree = this;
+    BinaryTree retTree = null;
+    while(retTree==null)
+    {
+        if(tmpTree.key.compareKey(inkey) > 0)
+            if(tmpTree.lesser!=null)
+                tmpTree=tmpTree.lesser;
+            else
+                retTree=tmpTree;
+        else
+            if(tmpTree.greater!=null)
+                tmpTree=tmpTree.greater;
+            else
+                retTree=tmpTree;
+    }
+    return retTree;
 }
 
 public BinaryTree getLeast()
 {
-  if (lesser != null) {
-     return (lesser.getLeast());
-     }
-  return this;
+    //Rewritten to Avoid StackOverflowError
+    BinaryTree tmpLeast=this;
+    while(tmpLeast.lesser!=null)
+    {
+        tmpLeast=tmpLeast.lesser;
+    }
+    return tmpLeast;
 }
 
 public BinaryTree getNext()
 {
   if (greater == null)
-       if (above == null) return null;
-       else return above.goingUp(key);
+       if (above == null)
+           return null;
+       else
+           return above.goingUp(key);
   return greater.getLeast();
 }
 
 private BinaryTree goingUp(NodeKey inKey)
 {
-  if (key.compareKey(inKey) <= 0)
-     if (above == null) return null;
-     else return above.goingUp(key);
-  return this;
+    //Rewritten to Avoid StackOverflowError
+    BinaryTree tmpTree=this;
+    BinaryTree retTree=null;
+    while(tmpTree.key.compareKey(inKey) <= 0)
+    {
+    	if(tmpTree.above==null)
+    		return tmpTree.above;
+    	else	
+            tmpTree=tmpTree.above;
+    }
+    return tmpTree;
 }
 
 
