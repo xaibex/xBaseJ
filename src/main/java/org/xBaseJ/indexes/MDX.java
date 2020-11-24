@@ -273,7 +273,7 @@ int prev_page = 0;
 BinaryTree tree2 = null;
 int pos = 0;
 if (level > 0) prev_page = top_Node;
-top_Node = (short) mfile.anchor.get_nextavailable();
+top_Node = mfile.anchor.get_nextavailable(); //removed (short) conversion to prevent Negative seek offset Error
 workNode = new MNode(mfile, key_per_Node, key_length, keyType, top_Node, level>0);
 workNode.set_prev_page(prev_page);
 mfile.anchor.update_nextavailable();
@@ -323,7 +323,7 @@ btLoop: while (true)
                topNode = workNode;
                break btLoop; // we're all done
               }
-           top_Node = (short) mfile.anchor.get_nextavailable();
+           top_Node = mfile.anchor.get_nextavailable(); //removed (short) conversion to prevent Negative seek offset Error
            workNode = new MNode(mfile, key_per_Node, key_length, keyType, top_Node, level>0);
            mfile.anchor.update_nextavailable();
            tagHead.pagesused += mfile.anchor.get_blocksize();
