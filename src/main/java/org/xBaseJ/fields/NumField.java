@@ -34,6 +34,8 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import org.xBaseJ.xBaseJException;
 
@@ -45,8 +47,7 @@ public class NumField extends Field{
 	 */
 private static final long serialVersionUID = 1L;
 private byte decPosition = 0;
-static DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-static char decimalSeparator = dfs.getDecimalSeparator();
+static char decimalSeparator = '.'; //decimalSeperator always '.' for dbf files!
 public static final char type = 'N';
 
 public NumField() {super();}
@@ -319,7 +320,9 @@ public void put(double inValue) throws xBaseJException
             sb.setCharAt(pos,'0');
     }
 
-    DecimalFormat df = new DecimalFormat(sb.toString());
+    DecimalFormat df = (DecimalFormat) NumberFormat.getInstance(Locale.ENGLISH);
+    df.applyPattern(sb.toString());
+
     String s = df.format(inValue).trim();
     put(s);
   }
