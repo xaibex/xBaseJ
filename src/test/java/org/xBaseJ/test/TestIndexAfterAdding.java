@@ -41,7 +41,7 @@ public class TestIndexAfterAdding extends TestCase {
         NumField Hit_Count = null;
         NumField Last_Draw_No = null;
 
-        DBF oDB = new DBF( "testIndexAfterAdding.dbf", true);
+        DBF oDB = new DBF( "testfiles/testIndexAfterAdding.dbf", true);
 
         Elm_No          = new NumField( "ElmNo",    2, 0);
         Hit_Count       = new NumField( "HitCount", 6, 0);
@@ -52,7 +52,7 @@ public class TestIndexAfterAdding extends TestCase {
         oDB.addField(Last_Draw_No);
 
 
-        oDB.createIndex("testIndexAfterAdding_elmno.ndx","ElmNo",true,true);
+        oDB.createIndex("testfiles/testIndexAfterAdding_elmno.ndx","ElmNo",true,true);
 
         Elm_No.put( 14);
         Hit_Count.put( 22);
@@ -71,12 +71,12 @@ public class TestIndexAfterAdding extends TestCase {
 
         oDB.close();
 
-        DBF pDB = new DBF( "testIndexAfterAdding.dbf");
+        DBF pDB = new DBF( "testfiles/testIndexAfterAdding.dbf");
         Elm_No       = (NumField) pDB.getField("ElmNo");
         Hit_Count    = (NumField) pDB.getField("HitCount");
         Last_Draw_No = (NumField) pDB.getField("LstDrwNo");
 
-        pDB.useIndex( "testIndexAfterAdding_elmno.ndx");
+        pDB.useIndex( "testfiles/testIndexAfterAdding_elmno.ndx");
 
         System.out.println("first");
         pDB.find( "44");
