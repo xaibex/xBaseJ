@@ -48,7 +48,7 @@ public class MissingMDX extends TestCase {
 		Util.setxBaseJProperty("ignoreMissingMDX", "");
 		assertEquals(Util.getxBaseJProperty("ignoreMissingMDX"), "");
 
-		File f = new File("testFiles/test.dbf");
+		File f = new File("testfiles/test.dbf");
 		f.delete();
 		f = new File("testFiles/test.mdx");
 		f.delete();
