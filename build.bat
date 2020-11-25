@@ -1,7 +1,5 @@
-cd testfiles
-del /F /Q *
-cd ..
+del /F /Q testfiles\*
 copy testresources\* testfiles
-mvn clean install
-cd testfiles
-del /F /Q *
+call mvn clean install
+del /Q testfiles\*
+type nul > testfiles\.gitkeep
