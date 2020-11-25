@@ -485,4 +485,14 @@ public class Util extends Object {
 
 	}
 
+	public static void recheckProperties()
+    {
+        recheckProperties=true;
+        prop_dont_trim_fields=false;
+        prop_filled_with_spaces=false;
+        dontTrimFields();
+        fieldFilledWithSpaces();
+        recheckProperties=false;
+    }
+
 }
