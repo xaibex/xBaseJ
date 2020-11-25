@@ -68,6 +68,7 @@ public class Util extends Object {
 	private static String servletContextPath = null;
 
 	static boolean prop_filled_with_spaces = false;
+	static boolean prop_dont_trim_fields = false;
 	
 	private static boolean x86Architecture = ((System.getProperty("os.arch").indexOf("86") == 0)
             && (System.getProperty("os.arch").compareTo("vax") != 0));
@@ -314,17 +315,19 @@ public class Util extends Object {
      */
     public static boolean dontTrimFields()
     {
-    	String prop;
-		try {
-			prop = getxBaseJProperty("trimFields");
-		} catch (IOException e) {
-			return false;
-		}
-        if (prop.toLowerCase().compareTo("yes") == 0)
-        		return true;
-        if (prop.toLowerCase().compareTo("true") == 0)
-        		return true;
-        return false;
+        if(recheckProperties) {
+            String prop;
+            try {
+                prop = getxBaseJProperty("trimFields");
+            } catch (IOException e) {
+                return false;
+            }
+            if (prop.toLowerCase().compareTo("yes") == 0)
+                prop_dont_trim_fields= true;
+            if (prop.toLowerCase().compareTo("true") == 0)
+                prop_dont_trim_fields= true;
+        }
+        return prop_dont_trim_fields;
     }
 
     /**
