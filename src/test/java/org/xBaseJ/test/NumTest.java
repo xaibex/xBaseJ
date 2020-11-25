@@ -47,15 +47,16 @@ public class NumTest extends TestCase {
             NumField nf = new NumField("name", 7, 3);
             double a = 987.123f;
             nf.put(a);
-            assertEquals(nf.get(), "987.123");
+            assertEquals("987.123",nf.get());
             NumField numField = new NumField("N", 7,3);
             FloatField floatField = new FloatField("F", 7,3);
             float floatValue = 987.123f;
             System.out.println("intial value before write = "+floatValue);
             numField.put(floatValue);
-            assertEquals(numField.get(), "987.123");
+            assertEquals("987.123", numField.get());
             floatField.put(floatValue);
-            assertEquals(floatField.get(), "987.123");
+
+            assertEquals("987.123", floatField.get());
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -66,13 +67,13 @@ public class NumTest extends TestCase {
             NumField nf = new NumField("name", 6, 2);
             double a = -50000000.36;
             nf.put(a);
-            assertEquals(nf.get(), "-00.36");
+            assertEquals("-00.36", nf.get() );
             a = 50000000.36;
             nf.put(a);
-            assertEquals(nf.get(), "000.36");
+            assertEquals("000.36", nf.get() );
             a = -.36;
             nf.put(a);
-            assertEquals(nf.get(), "  -.36");
+            assertEquals("  -.36",nf.get() );
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -84,7 +85,7 @@ public class NumTest extends TestCase {
     	try {
     		NumField nf = new NumField("name", 6, 2);
     		nf.put("");
-    		assertEquals(nf.get(), "");
+    		assertEquals("", nf.get());
     	}
     	catch (Exception e) {
     		fail(e.getMessage());
