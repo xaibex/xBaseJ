@@ -57,6 +57,7 @@ public class TestNoBlanks extends TestCase {
 		try {
 			Util.closexBaseJProperty();
 			Util.copyFile("testfiles/noblanks.xBaseJ.txt", "org.xBaseJ.properties");
+			Util.recheckProperties();
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			System.exit(0);
@@ -98,6 +99,7 @@ public class TestNoBlanks extends TestCase {
 		try {
 			Util.closexBaseJProperty();
 			Util.copyFile("testfiles/reset.xBaseJ.txt", "org.xBaseJ.properties");
+			Util.recheckProperties();
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			System.exit(0);
