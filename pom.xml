@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>it.ethiclab</groupId>
+  <groupId>it.xaibex</groupId>
   <artifactId>xBaseJ</artifactId>
   <version>0.0.1-SNAPSHOT</version>
     <dependencies>
@@ -11,4 +11,12 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+	<properties>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+		<maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
+	</properties>
+	<build>
+		<finalName>${project.artifactId}-${project.version}-${maven.build.timestamp}</finalName>
+	</build>
 </project>
